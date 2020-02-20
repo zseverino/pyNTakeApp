@@ -47,7 +47,7 @@ class Print(models.Model):
     email = models.EmailField(null=True, blank=True)
     print_name = models.CharField(max_length=200)
     usage = models.PositiveSmallIntegerField()
-    # need to insert fileField here
+    file = models.FileField(upload_to="testFiles")
     copies = models.PositiveSmallIntegerField()
     print_Type = models.ForeignKey(PrintType, on_delete=models.CASCADE)
     color = models.ForeignKey(Color, on_delete=models.CASCADE)
