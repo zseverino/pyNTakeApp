@@ -1,10 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
-</body>
+    <meta charset="UTF-8">
+    <head>
+        {%  load static %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>TechLab - Queue & Intake</title>
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet">
+
+        <!-- Icons -->
+        <link href={% static '/assets/css/nucleo-icons.css' %} rel="stylesheet">
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+        <!-- Argon CSS -->
+        <link type="text/css" href= {% static '/assets/css/argon-design-system.min.css' %} rel="stylesheet">
+    </head>
+
+    <body>
+        <nav id="navbar-main" class="navbar navbar-expand-lg navbar-light ">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="../ ">
+                    <img src="../static/assets/img/brand/MAKEmory.png">
+                    TechLab 3D Printing
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar-default">
+                    <div class="navbar-collapse-header">
+                        <div class="row">
+                            <div class="col-6 collapse-brand">
+                                <a href="../ ">
+                                    <img src="../static/assets/img/brand/MAKEmory.png">
+                                </a>
+                            </div>
+                            <div class="col-6 collapse-close">
+                                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span></span>
+                                    <span></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="navbar-nav ml-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/printCheck">Check Print</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="/printUpload">Upload Print</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/printPrices">Prices</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/employeeIndex">TechLab Employees</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Core -->
+        <script src= {% static 'assets/js/core/jquery.min.js' %} ></script>
+        <script src= {% static '/assets/js/core/popper.min.js' %} ></script>
+        <script src={% static '/assets/js/core/bootstrap.min.js' %} ></script>
+
+        <!-- Argon JS -->
+        <script src= {% static '/assets/js/argon-design-system.js' %}  ></script>
+
+    </body>
 </html>
