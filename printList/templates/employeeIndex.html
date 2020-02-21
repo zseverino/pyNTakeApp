@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
     <meta charset="UTF-8">
@@ -64,6 +66,39 @@
             </div>
         </nav>
 
+        <div class="container-fluid  mt-md-4 mb-md-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-center">Date & Time</th>
+                        <th>Net ID</th>
+                        <th>Print Name</th>
+                        <th>Status</th>
+                        <th>Copies</th>
+                        <th class="text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for print in print_list%}
+                    <tr>
+                        <td class="text-center">{{ print.intake_datetime }}</td>
+                        <td>{{ print.net_ID }}</td>
+                        <td>{{ print.print_name }}</td>
+                        <td>{{ print.status }}</td>
+                        <td>{{ print.copies }}</td>
+                        <td class="td-actions text-right">
+                          <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm " data-original-title="" title="">
+                            <i class="ni ni-circle-08 pt-1"></i>
+                          </button>
+                          <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">
+                            <i class="ni ni-settings-gear-65 pt-1"></i>
+                          </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
         <!-- Core -->
         <script src= {% static 'assets/js/core/jquery.min.js' %} ></script>

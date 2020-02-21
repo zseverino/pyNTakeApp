@@ -7,5 +7,5 @@ urlpatterns = [
     path('printCheck/', views.printCheck, name='printCheck'),
     path('printUpload/', views.printUpload, name='printUpload'),
     path('printPrices/', views.printPrices, name='printPrices'),
-    path('employeeIndex/', views.employeeIndex, name='employeeIndex')
+    path('employeeIndex/', views.employeeIndex.as_view(), name='employeeIndex')
 ]
