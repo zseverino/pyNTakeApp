@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import FileExtensionValidator
 
 # Create your models here.
 class PrintType(models.Model):
@@ -47,7 +48,7 @@ class Print(models.Model):
     email = models.EmailField(null=True, blank=True)
     print_name = models.CharField(max_length=200)
     usage = models.PositiveSmallIntegerField()
-    file = models.FileField(upload_to="testFiles")
+    file = models.FileField(upload_to="testFiles", validators=[FileExtensionValidator(allowed_extensions=['3mf', 'gcode'])])
     copies = models.PositiveSmallIntegerField()
     print_Type = models.ForeignKey(PrintType, on_delete=models.CASCADE)
     color = models.ForeignKey(Color, on_delete=models.CASCADE)

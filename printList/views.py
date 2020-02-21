@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
 
+from printList.models import Print, Printer, PrintType, Purpose, Color, Association, Resolution, Infill, Status
+
 # Create your views here.
 def index(request):
     template = loader.get_template('../templates/index.html')
@@ -20,5 +22,6 @@ def printUpload(request):
     return HttpResponse(template.render())
 
 def employeeIndex(request):
-    template = loader.get_template('../templates/employeeIndex.html')
-    return HttpResponse(template.render())
+    num_Prints = Print.objects.all().count()
+
+    return render(request, 'employeeIndex.html')
