@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from printList.models import Print, Printer, PrintType, Purpose, Color, Association, Resolution, Infill, Status
 
@@ -26,6 +27,6 @@ def login(request):
     template = loader.get_template('../templates/registration/login.html')
     return HttpResponse(template.render())
 
-class employeeIndex(generic.ListView):
+class employeeIndex(LoginRequiredMixin, generic.ListView):
     model = Print
     template_name = 'employeeIndex.html'
