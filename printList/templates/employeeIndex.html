@@ -12,7 +12,6 @@
         {%  load static %}
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
         <title>TechLab - Queue & Intake</title>
 
         <!-- Fonts -->
@@ -27,10 +26,18 @@
     </head>
 
     <body>
+        <!-- Core -->
+        <script src= {% static 'assets/js/core/jquery.min.js' %} ></script>
+        <script src= {% static '/assets/js/core/popper.min.js' %} ></script>
+        <script src={% static '/assets/js/core/bootstrap.min.js' %} ></script>
+
+        <!-- Argon JS -->
+        <script src= {% static '/assets/js/argon-design-system.js' %}  ></script>
+
         <nav id="navbar-main" class="navbar navbar-expand-lg navbar-light ">
             <div class="container-fluid">
                 <a class="navbar-brand" href="../ ">
-                    <img src="../static/assets/img/brand/MAKEmory.png">
+                    <img src="../static/assets/img/brand/dooley.png">
                     TechLab 3D Printing
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +48,7 @@
                         <div class="row">
                             <div class="col-6 collapse-brand">
                                 <a href="../ ">
-                                    <img src="../static/assets/img/brand/MAKEmory.png">
+                                    <img src="../static/assets/img/brand/dooley.png">
                                 </a>
                             </div>
                             <div class="col-6 collapse-close">
@@ -71,7 +78,35 @@
             </div>
         </nav>
 
-        <div class="container-fluid  mt-md-4 mb-md-4">
+        <!-- Button trigger modal -->
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-outline-primary justify-content-center" data-toggle="modal" data-target="#newPrintModal">
+             Add Print
+            </button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="newPrintModal" tabindex="-1" role="dialog" aria-labelledby="printModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="printModalLabel">Add Print</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container  mt-md-4 mb-md-4">
             <table class="table">
                 <thead>
                     <tr>
@@ -84,18 +119,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for print in print_list%}
+                    {% for print in print_list %}
                     <tr>
                         <td class="text-center">{{ print.intake_datetime }}</td>
                         <td>{{ print.net_ID }}</td>
                         <td>{{ print.print_name }}</td>
                         <td>{{ print.status }}</td>
                         <td>{{ print.copies }}</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm " data-original-title="" title="">
-                            <i class="ni ni-circle-08 pt-1"></i>
-                          </button>
-                          <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">
+                        <td class="td-actions text-center">
+                          <button type="button" rel="tooltip" class="open-PrintInfo btn btn-outline-primary btn-sm "
+                                  data-name="{{ print }}" data-status="{{ print.status }}" data-netid="{{ print.net_ID }}" data-printtype="{{ print.print_Type }}"
+                                  data-color="{{ print.color }}" data-resolution="{{ print.resolution }}" data-infill="{{ print.infill }}"
+                                  data-printer="{{ print.printer }}" data-copies="{{ print.copies }}" data-comment="{{ print.comment}}"
+                                  data-toggle="modal" href="#printModal">
                             <i class="ni ni-settings-gear-65 pt-1"></i>
                           </button>
                         </td>
@@ -105,13 +141,90 @@
             </table>
         </div>
 
-        <!-- Core -->
-        <script src= {% static 'assets/js/core/jquery.min.js' %} ></script>
-        <script src= {% static '/assets/js/core/popper.min.js' %} ></script>
-        <script src={% static '/assets/js/core/bootstrap.min.js' %} ></script>
+        <div class="open-PrintInfo modal fade" id="printModal" tabindex="-1" role="dialog" aria-labelledby="printModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="currentPrint"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <dl class="col">
+                      <div class="row">
+                          <dt><strong>NetID: </strong></dt>
+                          &nbsp;
+                          <dd class="netid"></dd>
+                      </div>
 
-        <!-- Argon JS -->
-        <script src= {% static '/assets/js/argon-design-system.js' %}  ></script>
+                      <div class="row">
+                          <dt><strong>Status: </strong></dt>
+                          &nbsp;
+                          <dd class="status"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Print Type: </strong></dt>
+                          &nbsp;
+                          <dd class="printtype"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Color: </strong></dt>
+                          &nbsp;
+                          <dd class="color"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Resolution: </strong></dt>
+                          &nbsp;
+                          <dd class="resolution"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Infill: </strong></dt>
+                          &nbsp;
+                          <dd class="infill"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Printer: </strong></dt>
+                          &nbsp;
+                          <dd class="printer"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Comment: </strong></dt>
+                          &nbsp;
+                          <dd class="comment"></dd>
+                      </div>
+
+                  </dl>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script type="text/javascript">
+            $('#printModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                var modal = $(this)
+
+                modal.find('.modal-title').text("Print: " + button.data('name'))
+                modal.find('.netid').text(button.data('netid'))
+                modal.find(".status").text(button.data('status'))
+                modal.find(".printtype").text(button.data('printtype'))
+                modal.find(".color").text(button.data('color'))
+                modal.find(".resolution").text(button.data('resolution'))
+                modal.find(".infill").text(button.data('infill'))
+                modal.find(".printer").text(button.data('printer'))
+                modal.find(".comment").text(button.data('comment'))
+            })
+        </script>
 
     </body>
 
