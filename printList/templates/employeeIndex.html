@@ -3,6 +3,9 @@
     <meta charset="UTF-8">
     <head>
         <style>
+        nav.navbar.navbar-light {
+                border-bottom: 1px solid #e5e5e5;
+            }
         #footer {
             position: fixed;
             bottom: 0;
@@ -15,6 +18,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>TechLab - Queue & Intake</title>
 
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet">
 
@@ -35,7 +39,12 @@
         <!-- Argon JS -->
         <script src= {% static '/assets/js/argon-design-system.js' %}  ></script>
 
-        <nav id="navbar-main" class="navbar navbar-expand-lg navbar-dark bg-gradient-primary">
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+        <!-- Latest compiled and minified Locales -->
+        <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+
+        <nav id="navbar-main" class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="../ ">
                     <img src="../static/assets/img/brand/dooley.png">
@@ -109,7 +118,8 @@
         </div>
 
         <div class="container  mt-md-4 mb-md-4">
-            <table class="table">
+            <table id="table" data-toggle="table" data-pagination="true"  data-search="true" data-locale="en-US"
+            data-show-export="true">
                 <thead>
                     <tr>
                         <th class="text-center">Date & Time</th>
@@ -141,6 +151,9 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <div id="toolbar">
+                <button id="button" class="btn btn-secondary">refresh</button>
+            </div>
         </div>
 
         <div class="open-PrintInfo modal fade" id="printModal" tabindex="-1" role="dialog" aria-labelledby="printModalLabel" aria-hidden="true">
@@ -210,6 +223,15 @@
             </div>
           </div>
         </div>
+
+        <script type="text/javascript">
+            var $button = $('#button')
+            $(function() {
+                $button.click(function () {
+                    window.location.reload();
+                })
+             })
+        </script>
 
         <script type="text/javascript">
             $('#printModal').on('show.bs.modal', function (event) {
