@@ -2,25 +2,16 @@
 <html lang="en">
     <meta charset="UTF-8">
     <head>
-        <style>
-        nav.navbar.navbar-light {
-                border-bottom: 1px solid #e5e5e5;
-            }
-        #footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-        </style>
         {%  load static %}
         <link rel="icon" href="../static/assets/img/brand/MAKEmory%20FB%20Icon.png">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="refresh" content="30" />
         <title>TechLab - Queue & Intake</title>
 
         <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 
         <!-- Icons -->
         <link href={% static '/assets/css/nucleo-icons.css' %} rel="stylesheet">
@@ -28,6 +19,8 @@
 
         <!-- Argon CSS -->
         <link type="text/css" href= {% static '/assets/css/argon-design-system.min.css' %} rel="stylesheet">
+
+        <link href="../static/assets/css/style.css" rel="stylesheet">
     </head>
 
     <body>
@@ -82,7 +75,7 @@
                             <a class="nav-link" href="/printPrices">Prices</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/accounts/login">TechLab Employees</a>
+                            <a class="nav-link" href="/employeeIndex">TechLab Employees</a>
                         </li>
                     </ul>
                 </div>
@@ -91,30 +84,9 @@
 
         <!-- Button trigger modal -->
         <div class="d-flex justify-content-center mt-md-7">
-            <button type="button" class="btn btn-primary justify-content-center" data-toggle="modal" data-target="#newPrintModal">
+            <a type="button" class="btn btn-primary justify-content-center" href="/employeeIntake">
              Add Print
-            </button>
-        </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="newPrintModal" tabindex="-1" role="dialog" aria-labelledby="printModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="printModalLabel">Add Print</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                ...
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Submit</button>
-              </div>
-            </div>
-          </div>
+            </a>
         </div>
 
         <div class="container  mt-md-4 mb-md-4">

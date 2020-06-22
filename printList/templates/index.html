@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         {%  load static %}
         <meta charset="utf-8">
@@ -8,16 +7,10 @@
 
         <title>TechLab 3D Printing</title>
 
-        <style>
-            nav.navbar.navbar-light {
-                border-bottom: 1px solid #e5e5e5;
-            }
-        </style>
-
         <link rel="icon" href="../static/assets/img/brand/MAKEmory%20FB%20Icon.png">
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 
         <!-- Icons -->
         <link href={% static '/assets/css/nucleo-icons.css' %} rel="stylesheet">
@@ -25,6 +18,8 @@
 
         <!-- Argon CSS -->
         <link type="text/css" href= {% static '/assets/css/argon-design-system.min.css' %} rel="stylesheet">
+
+        <link href="../static/assets/css/style.css" rel="stylesheet">
     </head>
 
     <body>
@@ -47,10 +42,7 @@
                                 </a>
                             </div>
                             <div class="col-6 collapse-close">
-                                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
-                                    <span></span>
-                                    <span></span>
-                                </button>
+                                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation"></button>
                             </div>
                         </div>
                     </div>
@@ -66,7 +58,7 @@
                             <a class="nav-link" href="/printPrices">Prices</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/accounts/login">TechLab Employees</a>
+                            <a class="nav-link" href="/employeeIndex">TechLab Employees</a>
                         </li>
                     </ul>
                 </div>

@@ -43,7 +43,7 @@ class Status(models.Model):
         return self.status_text
 
 class Print(models.Model):
-    intake_datetime = models.DateTimeField('Date')
+    intake_datetime = models.DateField('Date')
     net_ID = models.CharField(max_length=10)
     email = models.EmailField(null=True, blank=True)
     print_name = models.CharField(max_length=200)
