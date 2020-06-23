@@ -1,0 +1,45 @@
+How to setup and test the Django development environment:
+
+    1. Install Python - the most recent version available
+        https://www.python.org/downloads/
+
+    2. Install Pip
+        https://pip.pypa.io/en/latest/installing/
+
+    3. Install virtualenv and virtualenvwrapper
+        Windows: 
+            run in cmd:  "py -m pip install virtualenvwrapper-win"
+        Mac:
+            run: "py -m pip install virtualenvwrapper"
+            modify shell startup file:
+                run "cat >> ~/.bash_profile" copy and paste the following lines:
+                    export WORKON_HOME=$HOME/.virtualenvs
+                    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+                    export PROJECT_HOME=$HOME/Devel
+                    source /usr/local/bin/virtualenvwrapper.sh
+                Control + D to exit and then re open the terminal
+            run: source ~/.bash_profile
+
+    4. Create a virtual environment
+        run: "mkvirtualenv my_django_environment" 
+        Useful Commands:
+            deactivate — Exit out of the current Python virtual environment
+            workon — List available virtual environments
+            workon name_of_environment — Activate the specified Python virtual environment
+            rmvirtualenv name_of_environment — Remove the specified environment.
+
+    5. Once in the virtual environment, install Django & Crispy forms:
+        pip3 install django
+        pip install django-crispy-forms
+
+    6. cd to the clone repository and run the command:
+        "py manage.py runserver"
+
+Source for more Details: 
+    https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/development_environment
+    https://docs.djangoproject.com/en/3.0/topics/install/
+
+
+Troubleshooting:
+On an apple operating system you may have to replace "py" command with "python".
+If Step 3 doesn't work, check where pip installed virtualenvwrapper (easiest way is to run "pip uninstall virtualenvwrapper" and then see what it says it will uninstall, and then click N when it asks to confirm.)
