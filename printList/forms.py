@@ -18,4 +18,11 @@ class printForm(ModelForm):
             'comment'
         ]
 
-form = printForm()
+class updateForm(ModelForm):
+    class Meta:
+        model = Print
+        fields = [
+            'usage', 'file', 'copies', 'print_Type', 'color',
+            'resolution', 'infill', 'printer', 'status',
+            'comment'
+        ]

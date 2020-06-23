@@ -8,5 +8,7 @@ urlpatterns = [
     path('printUpload/', views.printUpload, name='printUpload'),
     path('printPrices/', views.printPrices, name='printPrices'),
     path('employeeIndex/', views.employeeIndex.as_view(), name='employeeIndex'),
-    path('employeeIntake/', views.employeeIntake, name='employeeIntake')
+    path('employeeIntake/', views.employeeIntake, name='employeeIntake'),
+    path('employeeUpdate/<int:pk>', views.employeeUpdate, name='employeeUpdate'),
+    path('employeeCheck/<int:pk>', views.employeeCheck, name='employeeCheck')
 ]
