@@ -31,6 +31,7 @@ How to setup and test the Django development environment:
     5. Once in the virtual environment, install Django & Crispy forms:
         pip3 install django
         pip install django-crispy-forms
+        pip install django-storages[google]
 
     6. cd to the clone repository and run the command:
         "py manage.py runserver"
