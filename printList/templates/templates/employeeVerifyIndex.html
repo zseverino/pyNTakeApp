@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <head>
+        {%  load static %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="refresh" content="30" />
+        <title>TechLab - Queue</title>
+
+        <link rel="icon" href=" {% static '/assets/img/brand/MAKEmory%20FB%20Icon.png' %}">
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+
+        <!-- Icons -->
+        <link href={% static '/assets/css/nucleo-icons.css' %} rel="stylesheet">
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+        <!-- CSS -->
+        <link type="text/css" href= {% static '/assets/css/argon-design-system.min.css' %} rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
+        <link type="text/css" href=" {% static '/assets/css/style.css'%}" rel="stylesheet">
+    </head>
+
+    <body>
+        <nav id="navbar-main" class="navbar navbar-expand-lg navbar-light shadow">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="../ ">
+                    <img src="../static/assets/img/brand/dooley.png">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar-default">
+                    <div class="navbar-collapse-header">
+                        <div class="row">
+                            <div class="col-6 collapse-brand">
+                                <a href="../ ">
+                                    <img src="../static/assets/img/brand/dooley.png">
+                                </a>
+                            </div>
+                            <div class="col-6 collapse-close">
+                                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span></span>
+                                    <span></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="navbar-nav ml-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/employeeIndex">Queue</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/employeeVerifyIndex">Verify Prints</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        {% if messages %}
+            <section class="messages">
+                {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+            {% endfor %}
+            </section>
+        {% endif %}
+
+        <div class="container-fluid  mt-md-4 mb-md-4">
+            <table id="table" data-toggle="table" data-pagination="true"  data-search="true" data-locale="en-US"
+            data-show-export="true">
+                <thead>
+                    <tr>
+                        <th class="text-center">Date & Time</th>
+                        <th>Net ID</th>
+                        <th>Print Name</th>
+                        <th>Status</th>
+                        <th>Copies</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for print in print_list reversed %}
+                    {% if not print.verification %}
+                    <tr>
+                        <td class="text-center">{{ print.intake_datetime }}</td>
+                        <td>{{ print.net_ID_or_name }}</td>
+                        <td>
+                            <a type="link" rel="tooltip" class="open-PrintInfo"
+                                  data-name="{{ print }}" data-status="{{ print.status }}" data-netid="{{ print.net_ID_or_name }}" data-printtype="{{ print.print_Type }}"
+                                  data-color="{{ print.color }}" data-resolution="{{ print.resolution }}" data-infill="{{ print.infill }}"
+                                  data-printer="{{ print.printer }}" data-copies="{{ print.copies }}" data-comment="{{ print.comment}}" data-pk="{{ print.pk }}"
+                                  data-verification="{{ print.verification }}" data-intake="{{ print.intake_datetime }}" data-update="{{ print.updated_datetime }}"
+                                  data-toggle="modal" href="#printModal">
+                                {{ print }}
+                            </a>
+                        </td>
+                        <td>{{ print.status }}</td>
+                        <td class="text-center">{{ print.copies }}</td>
+                        <td class="td-actions text-center">
+                            <button type="button" rel="tooltip" class="btn btn-outline-primary btn-sm">
+                                <i class="ni ni-cloud-download-95 pt-1"></i>
+                            </button>
+                            <a type="button" rel="tooltip" class="btn btn-outline-success btn-sm" href="/employeeUpdate/{{ print.pk }}">
+                                <i class="ni ni-curved-next pt-1"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div id="toolbar">
+                <button id="button" class="btn btn-success">refresh</button>
+            </div>
+        </div>
+
+        <div class="open-PrintInfo modal fade" id="printModal" tabindex="-1" role="dialog" aria-labelledby="printModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="currentPrint"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <dl class="col">
+                      <div class="row">
+                          <dt><strong>Intake Time and Date: </strong></dt>
+                          &nbsp;
+                          <dd class="intake"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Last Updated: </strong></dt>
+                          &nbsp;
+                          <dd class="update"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>NetID/Name: </strong></dt>
+                          &nbsp;
+                          <dd class="netid"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Status: </strong></dt>
+                          &nbsp;
+                          <dd class="status"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Verification: </strong></dt>
+                          &nbsp;
+                          <dd class="verification"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Print Type: </strong></dt>
+                          &nbsp;
+                          <dd class="printtype"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Color: </strong></dt>
+                          &nbsp;
+                          <dd class="color"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Resolution: </strong></dt>
+                          &nbsp;
+                          <dd class="resolution"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Infill: </strong></dt>
+                          &nbsp;
+                          <dd class="infill"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Printer: </strong></dt>
+                          &nbsp;
+                          <dd class="printer"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Comment: </strong></dt>
+                          &nbsp;
+                          <dd class="comment"></dd>
+                      </div>
+
+                  </dl>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section class="blank-space-large"></section>
+
+        <footer class="footer">
+          <div class="container">
+            <div class="row align-items-center justify-content-md-between">
+              <div class="col-md-6">
+                <div class="copyright">
+                  &copy; 2020 <a href="http://it.emory.edu/studentdigitallife/study_production_spaces/tech-lab/index.html" target="_blank">Emory TechLab</a>.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <ul class="nav nav-footer justify-content-end">
+                  <li class="nav-item">
+                    <a href="http://it.emory.edu/studentdigitallife/study_production_spaces/tech-lab/3DFabrication.html" class="nav-link" target="_blank">About Us</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="https://github.com/EmoryTechlab" class="nav-link" target="_blank">Github</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" class="nav-link" target="_blank">License</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+        <!-- Core -->
+        <script src= {% static 'assets/js/core/jquery.min.js' %} ></script>
+        <script src= {% static '/assets/js/core/popper.min.js' %} ></script>
+        <script src={% static '/assets/js/core/bootstrap.min.js' %} ></script>
+
+        <!-- Argon JS -->
+        <script src= {% static '/assets/js/argon-design-system.js' %}  ></script>
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+        <!-- Latest compiled and minified Locales -->
+        <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+
+        <script type="text/javascript">
+            var $button = $('#button')
+            $(function() {
+                $button.click(function () {
+                    window.location.reload();
+                })
+             })
+        </script>
+
+        <script type="text/javascript">
+            $('#printModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                var modal = $(this)
+
+                modal.find('.modal-title').text("Print: " + button.data('name'))
+                modal.find('.intake').text(button.data('intake'))
+                modal.find('.update').text(button.data('update'))
+                modal.find('.netid').text(button.data('netid'))
+                modal.find(".status").text(button.data('status'))
+                modal.find(".verification").text(button.data('verification'))
+                modal.find(".printtype").text(button.data('printtype'))
+                modal.find(".color").text(button.data('color'))
+                modal.find(".resolution").text(button.data('resolution'))
+                modal.find(".infill").text(button.data('infill'))
+                modal.find(".printer").text(button.data('printer'))
+                modal.find(".comment").text(button.data('comment'))
+            })
+        </script>
+
+        <script>
+            $(document).ready(function(){
+                $('.messages').delay(5000).fadeOut();
+            });
+        </script>
+    </body>
+</html>
