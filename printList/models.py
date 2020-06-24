@@ -37,27 +37,30 @@ class Purpose(models.Model):
     def __str__(self):
         return self.purpose_text
 
-class Status(models.Model):
-    status_text = models.CharField(max_length=20)
-    def __str__(self):
-        return self.status_text
-
 class Print(models.Model):
-    intake_datetime = models.DateField('Date')
-    net_ID = models.CharField(max_length=10)
-    email = models.EmailField(null=True, blank=True)
+    intake_datetime = models.DateTimeField(auto_now_add=True)
+    updated_datetime = models.DateTimeField(auto_now=True)
+    net_ID_or_name = models.CharField(max_length=10, null=True)
+    email = models.EmailField(null=True)
     print_name = models.CharField(max_length=200)
-    usage = models.PositiveSmallIntegerField()
-    file = models.FileField(upload_to="testFiles/", validators=[FileExtensionValidator(allowed_extensions=['3mf', 'gcode'])])
+    usage = models.PositiveSmallIntegerField(null=True, blank=True)
+    file = models.FileField(upload_to="testFiles/", validators=[FileExtensionValidator(allowed_extensions=['stl', '3mf', 'gcode'])])
     copies = models.PositiveSmallIntegerField()
     print_Type = models.ForeignKey(PrintType, on_delete=models.CASCADE)
     color = models.ForeignKey(Color, on_delete=models.CASCADE)
     association = models.ForeignKey(Association, on_delete=models.CASCADE)
-    resolution = models.ForeignKey(Resolution, on_delete=models.CASCADE)
-    infill = models.ForeignKey(Infill, on_delete=models.CASCADE)
+    resolution = models.ForeignKey(Resolution, on_delete=models.CASCADE, null=True, blank=True)
+    infill = models.ForeignKey(Infill, on_delete=models.CASCADE, null=True, blank=True)
     purpose = models.ForeignKey(Purpose, on_delete=models.CASCADE)
     printer = models.ForeignKey(Printer, on_delete=models.CASCADE, null=True, blank=True)
-    status = models.ForeignKey(Status, on_delete=models.CASCADE, null=True, blank=True)
+
+    STATUS_CHOICES = (
+        ('NOTPRINTED', 'Not Printed'),
+        ('PRINTING', 'Printing'),
+        ('PRINTED', 'Printed'),
+    )
+    status = models.CharField(max_length=11, choices=STATUS_CHOICES, default="Not Printed")
+    verification = models.BooleanField(default=False)
     comment = models.TextField(null=True, blank=True)
     def __str__(self):
         return self.print_name

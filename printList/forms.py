@@ -1,21 +1,14 @@
-from django.forms import ModelForm
 from django import forms
+from django.forms import ModelForm
 from .models import Print
 
 class printForm(ModelForm):
-    intake_datetime = forms.DateField(
-        widget=forms.TextInput(
-            attrs={'type': 'date'}
-        )
-    )
-
     class Meta:
         model = Print
         fields = [
-            'intake_datetime', 'net_ID', 'email', 'print_name',
-            'usage', 'file', 'copies', 'print_Type', 'color',
-            'association', 'resolution', 'infill', 'purpose',
-            'comment'
+            'net_ID_or_name', 'email', 'association', 'purpose',
+            'print_name', 'file', 'copies', 'usage', 'print_Type', 'color',
+            'resolution', 'infill', 'comment', 'verification'
         ]
 
 class updateForm(ModelForm):
@@ -23,6 +16,18 @@ class updateForm(ModelForm):
         model = Print
         fields = [
             'usage', 'file', 'copies', 'print_Type', 'color',
-            'resolution', 'infill', 'printer', 'status',
+            'resolution', 'infill', 'printer', 'status', 'verification',
             'comment'
         ]
+
+class submitForm(ModelForm):
+    class Meta:
+        model = Print
+        fields = [
+            'net_ID_or_name', 'email', 'association', 'purpose',
+            'print_name', 'file', 'copies', 'print_Type', 'color',
+            'comment'
+        ]
+
+class checkForm(forms.Form):
+    net_id = forms.CharField(label='NetID', max_length=10)
