@@ -14,15 +14,28 @@ body {
 }
 
 .navbar {
-    border-top: 10px solid #5e72e4;
+    border-top: 5px solid #fbb140;
 }
 
+.navbar .navbar-collapse .navbar-collapse-header {
+    border-bottom: 1px solid #fbb140;
+}
+.container {
+    border-radius: 15px;
+}
 .carousel .carousel-inner {
     border-radius: 15px;
+}
+.blank-space {
+    height: 25px;
 }
 
 .blank-space-large {
     height: 100px;
+}
+
+.text-gold {
+    color: #fbb140;
 }
 
 .footer {
