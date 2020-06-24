@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <meta charset="UTF-8">
+    <head>
+        {%  load static %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>TechLab - Logged Out</title>
+
+        <link rel="icon" href=" {% static '/assets/img/brand/MAKEmory%20FB%20Icon.png' %}">
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+
+        <!-- Icons -->
+        <link href={% static '/assets/css/nucleo-icons.css' %} rel="stylesheet">
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+        <!-- CSS -->
+        <link type="text/css" href= {% static '/assets/css/argon-design-system.min.css' %} rel="stylesheet">
+        <link type="text/css" href=" {% static '/assets/css/style.css'%}" rel="stylesheet">
+    </head>
+
+    <body>
+        <nav id="navbar-main" class="navbar navbar-expand-lg navbar-light shadow">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="../../ ">
+                    <img src= {% static '/assets/img/brand/dooley.png' %}>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar-default">
+                    <div class="navbar-collapse-header">
+                        <div class="row">
+                            <div class="col-6 collapse-brand">
+                                <a href=" ../../ ">
+                                    <img src= {% static '/assets/img/brand/dooley.png' %}>
+                                </a>
+                            </div>
+                            <div class="col-6 collapse-close">
+                                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span></span>
+                                    <span></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="navbar-nav ml-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/printCheck">Check Print</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="/printUpload">Upload Print</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/accounts/login">TechLab Employees</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+         <section class="blank-space-large"></section>
+        <div class="container bg-lighter">
+            <section class="blank-space-large"></section>
+            <p class="display-1 text-center">Logged Out!</p>
+            <section class="blank-space-large"></section>
+            {% block content %}
+                <div class="col text-center">
+                    <a type="button" class="btn btn-primary" href="{% url 'login'%}">Click here to login again.</a>
+                </div>
+            {% endblock %}
+            <section class="blank-space-large"></section>
+        </div>
+
+        <!-- Core -->
+        <script src= {% static 'assets/js/core/jquery.min.js' %} ></script>
+        <script src= {% static '/assets/js/core/popper.min.js' %} ></script>
+        <script src={% static '/assets/js/core/bootstrap.min.js' %} ></script>
+
+        <!-- Argon JS -->
+        <script src= {% static '/assets/js/argon-design-system.js' %}  ></script>
+    </body>
+
+    <footer class="footer mt-md-4" id="footer">
+      <div class="container">
+
+        <div class="row align-items-center justify-content-md-between">
+          <div class="col-md-6">
+            <div class="copyright">
+              &copy; 2020 <a href="http://it.emory.edu/studentdigitallife/study_production_spaces/tech-lab/index.html" target="_blank">Emory TechLab</a>.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <ul class="nav nav-footer justify-content-end">
+              <li class="nav-item">
+                <a href="http://it.emory.edu/studentdigitallife/study_production_spaces/tech-lab/3DFabrication.html" class="nav-link" target="_blank">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a href="https://github.com/EmoryTechlab" class="nav-link" target="_blank">Github</a>
+              </li>
+              <li class="nav-item">
+                <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" class="nav-link" target="_blank">License</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+</html>
