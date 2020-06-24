@@ -51,16 +51,10 @@
 
                     <ul class="navbar-nav ml-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/printCheck">Check Print</a>
+                            <a class="nav-link" href="/employeeIndex">Queue</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="/printUpload">Upload Print</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/printPrices">Prices</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/employeeIndex">TechLab Employees</a>
+                            <a class="nav-link" href="/employeeVerifyIndex">Verify Prints</a>
                         </li>
                     </ul>
                 </div>
@@ -98,14 +92,16 @@
                 </thead>
                 <tbody>
                     {% for print in print_list reversed %}
+                    {% if print.verification %}
                     <tr>
                         <td class="text-center">{{ print.intake_datetime }}</td>
-                        <td>{{ print.net_ID }}</td>
+                        <td>{{ print.net_ID_or_name }}</td>
                         <td>
                             <a type="link" rel="tooltip" class="open-PrintInfo"
-                                  data-name="{{ print }}" data-status="{{ print.status }}" data-netid="{{ print.net_ID }}" data-printtype="{{ print.print_Type }}"
+                                  data-name="{{ print }}" data-status="{{ print.status }}" data-netid="{{ print.net_ID_or_name }}" data-printtype="{{ print.print_Type }}"
                                   data-color="{{ print.color }}" data-resolution="{{ print.resolution }}" data-infill="{{ print.infill }}"
                                   data-printer="{{ print.printer }}" data-copies="{{ print.copies }}" data-comment="{{ print.comment}}" data-pk="{{ print.pk }}"
+                                  data-verification="{{ print.verification }}" data-intake="{{ print.intake_datetime }}" data-update="{{ print.updated_datetime }}"
                                   data-toggle="modal" href="#printModal">
                                 {{ print }}
                             </a>
@@ -113,17 +109,18 @@
                         <td>{{ print.status }}</td>
                         <td class="text-center">{{ print.copies }}</td>
                         <td class="td-actions text-center">
-                            <a type="button" rel="tooltip" class="btn btn-outline-primary btn-sm" href="/employeeUpdate/{{ print.pk }}">
+                            <a type="button" rel="tooltip" class="btn btn-outline-danger btn-sm" href="/employeeUpdate/{{ print.pk }}">
                                 <i class="ni ni-settings-gear-65 pt-1"></i>
                             </a>
-                            <button type="button" rel="tooltip" class="btn btn-outline-warning btn-sm">
+                            <a type="button" rel="tooltip" class="btn btn-outline-primary btn-sm" href="/employeeDownload/{{ print.pk }}">
                                 <i class="ni ni-cloud-download-95 pt-1"></i>
-                            </button>
-                            <a type="button" rel="tooltip" class="btn btn-outline-success btn-sm" href="/employeeCheck/{{ print.pk }}">
+                            </a>
+                            <a type="button" rel="tooltip" class="btn btn-outline-success btn-sm" href="/employeeMarkPrinted/{{ print.pk }}">
                                 <i class="ni ni-check-bold pt-1"></i>
                             </a>
                         </td>
                     </tr>
+                    {% endif %}
                     {% endfor %}
                 </tbody>
             </table>
@@ -144,7 +141,19 @@
               <div class="modal-body">
                   <dl class="col">
                       <div class="row">
-                          <dt><strong>NetID: </strong></dt>
+                          <dt><strong>Intake Time and Date: </strong></dt>
+                          &nbsp;
+                          <dd class="intake"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Last Updated: </strong></dt>
+                          &nbsp;
+                          <dd class="update"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>NetID/Name: </strong></dt>
                           &nbsp;
                           <dd class="netid"></dd>
                       </div>
@@ -153,6 +162,12 @@
                           <dt><strong>Status: </strong></dt>
                           &nbsp;
                           <dd class="status"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Verification: </strong></dt>
+                          &nbsp;
+                          <dd class="verification"></dd>
                       </div>
 
                       <div class="row">
@@ -255,8 +270,11 @@
                 var modal = $(this)
 
                 modal.find('.modal-title').text("Print: " + button.data('name'))
+                modal.find('.intake').text(button.data('intake'))
+                modal.find('.update').text(button.data('update'))
                 modal.find('.netid').text(button.data('netid'))
                 modal.find(".status").text(button.data('status'))
+                modal.find(".verification").text(button.data('verification'))
                 modal.find(".printtype").text(button.data('printtype'))
                 modal.find(".color").text(button.data('color'))
                 modal.find(".resolution").text(button.data('resolution'))
