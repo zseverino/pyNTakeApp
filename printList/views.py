@@ -63,6 +63,13 @@ def employeeIntake(request):
         form = printForm()
     return render(request, 'employeeIntake.html', {'form': form})
 
+@login_required
+def employeeDownload(request, pk):
+    instance = get_object_or_404(Print, pk=pk)
+    filename = instance.file.name.split('/')[-1]
+    response = HttpResponse(instance.file, content_type='text/plain')
+    response['Content-Disposition'] = 'attachment; filename=%s' % filename
+    return response
 
 @login_required
 def employeeUpdate(request, pk):

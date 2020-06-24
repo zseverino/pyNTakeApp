@@ -38,13 +38,17 @@ class Purpose(models.Model):
         return self.purpose_text
 
 class Print(models.Model):
+    def user_directory_path(instance, filename):
+        # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+        return '{0}/{1}'.format(instance.net_ID_or_name, filename)
+
     intake_datetime = models.DateTimeField(auto_now_add=True)
     updated_datetime = models.DateTimeField(auto_now=True)
     net_ID_or_name = models.CharField(max_length=10, null=True)
     email = models.EmailField(null=True)
     print_name = models.CharField(max_length=200)
     usage = models.PositiveSmallIntegerField(null=True, blank=True)
-    file = models.FileField(upload_to="testFiles/", validators=[FileExtensionValidator(allowed_extensions=['stl', '3mf', 'gcode'])])
+    file = models.FileField(upload_to=user_directory_path, validators=[FileExtensionValidator(allowed_extensions=['stl', '3mf', 'gcode'])])
     copies = models.PositiveSmallIntegerField()
     print_Type = models.ForeignKey(PrintType, on_delete=models.CASCADE)
     color = models.ForeignKey(Color, on_delete=models.CASCADE)

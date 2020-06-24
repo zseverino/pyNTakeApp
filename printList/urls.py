@@ -10,5 +10,6 @@ urlpatterns = [
     path('employeeIntake/', views.employeeIntake, name='employeeIntake'),
     path('employeeUpdate/<int:pk>', views.employeeUpdate, name='employeeUpdate'),
     path('employeeMarkPrinted/<int:pk>', views.employeeMarkPrinted, name='employeeMarkPrinted'),
-    path('employeeVerifyIndex', views.employeeVerifyIndex.as_view(), name='employeeVerifyIndex')
+    path('employeeVerifyIndex', views.employeeVerifyIndex.as_view(), name='employeeVerifyIndex'),
+    path('employeeDownload/<int:pk>', views.employeeDownload, name='employeeDownload')
 ]
