@@ -96,6 +96,6 @@ def employeeMarkPrinted(request, pk):
               'Please feel free to stop by at your earliest convenience and someone in MAKEmory will be able to assist you.\n \n'
               'Thank you,\n'
               'MAKEmory Staff',
-              'zackseve@gmail.com', [email], fail_silently=False)
+              'zackseve@gmail.com', [email], fail_silently=True)
     instance.save()
     return HttpResponseRedirect('/employeeIndex')
