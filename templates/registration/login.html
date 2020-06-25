@@ -57,9 +57,6 @@
                             <a class="nav-link disabled" href="/printUpload">Upload Print</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/printPrices">Prices</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="/accounts/login">TechLab Employees</a>
                         </li>
                     </ul>
@@ -67,7 +64,8 @@
             </div>
         </nav>
 
-        <div class="container mt-md-7">
+        <div class="container mt-md-7 bg-lighter">
+            <section class="blank-space-large"></section>
             <img src= {% static '/assets/img/brand/dooley.png' %} alt="..." class="img-thumbnail rounded mx-auto d-block" width="200">
             {% load crispy_forms_tags %}
             {% block content %}
@@ -87,11 +85,14 @@
               <form method="post" action="{% url 'login' %}">
                 {% csrf_token %}
                 {{ form|crispy }}
-                <input class="btn btn-primary" type="submit" value="Login"/>
+                <input class="btn btn-outline-primary" type="submit" value="Login"/>
                 <input type="hidden" name="next" value="{{ next }}" />
               </form>
             {% endblock %}
+            <section class="blank-space-large"></section>
         </div>
+        <section class="blank-space-large"></section>
+        <section class="blank-space-large"></section>
 
         <!-- Core -->
         <script src= {% static 'assets/js/core/jquery.min.js' %} ></script>

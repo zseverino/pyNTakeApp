@@ -57,27 +57,23 @@
                             <a class="nav-link disabled" href="/printUpload">Upload Print</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/printPrices">Prices</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="/accounts/login">TechLab Employees</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <div class="container d-flex justify-content-center">
+         <section class="blank-space-large"></section>
+        <div class="container bg-lighter">
             <section class="blank-space-large"></section>
+            <p class="display-1 text-center">Logged Out!</p>
             <section class="blank-space-large"></section>
-            <p class="display-1">Logged Out!</p>
-        </div>
-
-
-
-        <div class="container d-flex justify-content-center">
             {% block content %}
-            <a type="button" class="btn btn-primary" href="{% url 'login'%}">Click here to login again.</a>
+                <div class="col text-center">
+                    <a type="button" class="btn btn-primary" href="{% url 'login'%}">Click here to login again.</a>
+                </div>
             {% endblock %}
+            <section class="blank-space-large"></section>
         </div>
 
         <!-- Core -->
