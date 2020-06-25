@@ -7,6 +7,8 @@ pyNTakeApp is a submission/intake system for 3D prints, specifcally designed for
 - Google Cloud Storage
 - Gunicorn
 - Postgres
+- Sqreen
+- Timber.io
 - Dj-Database-Url
 - Crispy Forms
 - WhiteNoise
