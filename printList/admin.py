@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Print, Color, Printer, PrintType, Association, Resolution, Infill, Purpose, Status
+from .models import Print, Color, Printer, PrintType, Association, Resolution, Infill, Purpose
 
 admin.site.register(Print)
 admin.site.register(Color)
@@ -11,4 +11,3 @@ admin.site.register(Association)
 admin.site.register(Resolution)
 admin.site.register(Infill)
 admin.site.register(Purpose)
-admin.site.register(Status)
