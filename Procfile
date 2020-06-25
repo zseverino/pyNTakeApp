@@ -1,1 +1,1 @@
-web: gunicorn pyNTakeApp.wsgi 
+web: gunicorn pyNTakeApp.wsgi --preload
