@@ -51,13 +51,10 @@
 
                     <ul class="navbar-nav ml-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/printCheck">Check Print</a>
+                            <a class="nav-link" href="/printCheck">Check Prints</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="/printUpload">Upload Print</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/printPrices">Prices</a>
+                            <a class="nav-link" href="/printUpload">Upload Prints</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/employeeIndex">TechLab Employees</a>
@@ -67,7 +64,21 @@
             </div>
         </nav>
 
-
+        <div class="container mt-md-4">
+            <section class="blank-space"></section>
+            <p class="display-4 text-center text-gold">*All prints will be verified before being printed!</p>
+            {% load crispy_forms_tags %}
+            {% block content %}
+                <form method="post" action="" enctype="multipart/form-data">
+                    <p>Please input your NetID if applicable <i class="ni ni-bold-down"></i></p>
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <p>If you have a specific request submit above <i class="ni ni-bold-up"></i></p>
+                    <input class="btn btn-primary" type=submit value="Submit"/>
+                </form>
+            {% endblock %}
+            <section class="blank-space-large"></section>
+        </div>
 
         <!-- Core -->
         <script src= {% static 'assets/js/core/jquery.min.js' %} ></script>

@@ -20,6 +20,7 @@
 
         <!-- CSS -->
         <link type="text/css" href= {% static '/assets/css/argon-design-system.min.css' %} rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
         <link type="text/css" href=" {% static '/assets/css/style.css'%}" rel="stylesheet">
     </head>
 
@@ -51,13 +52,10 @@
 
                     <ul class="navbar-nav ml-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/printCheck">Check Print</a>
+                            <a class="nav-link" href="/printCheck">Check Prints</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="/printUpload">Upload Print</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/printPrices">Prices</a>
+                            <a class="nav-link" href="/printUpload">Upload Prints</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/employeeIndex">TechLab Employees</a>
@@ -66,6 +64,120 @@
                 </div>
             </div>
         </nav>
+
+        <div class="container mt-md-4">
+            <section class="blank-space-large"></section>
+            {% load crispy_forms_tags %}
+            {% block content %}
+                <form method="post" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <input class="btn btn-primary" type=submit value="Submit"/>
+                </form>
+            {% endblock %}
+            <section class="blank-space"></section>
+            <p class="display-4 text-center text-gold">*All prints will be verified before being printed!</p>
+        </div>
+
+        <div class="container  mt-md-4 mb-md-4">
+            <table id="table" data-toggle="table" data-pagination="true"  data-search="true" data-locale="en-US"
+                data-show-export="true">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Date & Time</th>
+                            <th>Net ID</th>
+                            <th>Print Name</th>
+                            <th>Status</th>
+                            <th>Verification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for print in print_list reversed %}
+                        {% ifequal print.net_ID_or_name net_id %}
+                        <tr>
+                            <td class="text-center">{{ print.intake_datetime }}</td>
+                            <td>{{ print.net_ID_or_name }}</td>
+                            <td>
+                                <a type="link" rel="tooltip" class="open-PrintInfo"
+                                      data-name="{{ print }}" data-status="{{ print.status }}" data-netid="{{ print.net_ID_or_name }}" data-printtype="{{ print.print_Type }}"
+                                      data-color="{{ print.color }}" data-resolution="{{ print.resolution }}" data-infill="{{ print.infill }}"
+                                      data-printer="{{ print.printer }}" data-copies="{{ print.copies }}" data-comment="{{ print.comment}}" data-pk="{{ print.pk }}"
+                                      data-verification="{{ print.verification }}" data-intake="{{ print.intake_datetime }}" data-update="{{ print.updated_datetime }}"
+                                      data-toggle="modal" href="#printModal">
+                                    {{ print }}
+                                </a>
+                            </td>
+                            <td>{{ print.status }}</td>
+                            <td>{{ print.verification }}</td>
+                        </tr>
+                        {% endifequal %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+
+        <div class="open-PrintInfo modal fade" id="printModal" tabindex="-1" role="dialog" aria-labelledby="printModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="currentPrint"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <dl class="col">
+                      <div class="row">
+                          <dt><strong>Intake Time and Date: </strong></dt>
+                          &nbsp;
+                          <dd class="intake"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>NetID/Name: </strong></dt>
+                          &nbsp;
+                          <dd class="netid"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Print Type: </strong></dt>
+                          &nbsp;
+                          <dd class="printtype"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Color: </strong></dt>
+                          &nbsp;
+                          <dd class="color"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Status: </strong></dt>
+                          &nbsp;
+                          <dd class="status"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Verification: </strong></dt>
+                          &nbsp;
+                          <dd class="verification"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt><strong>Comment: </strong></dt>
+                          &nbsp;
+                          <dd class="comment"></dd>
+                      </div>
+
+                  </dl>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Core -->
         <script src= {% static 'assets/js/core/jquery.min.js' %} ></script>
         <script src= {% static '/assets/js/core/popper.min.js' %} ></script>
@@ -73,6 +185,27 @@
 
         <!-- Argon JS -->
         <script src= {% static '/assets/js/argon-design-system.js' %}  ></script>
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+        <!-- Latest compiled and minified Locales -->
+        <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+
+        <script type="text/javascript">
+            $('#printModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                var modal = $(this)
+
+                modal.find('.modal-title').text("Print: " + button.data('name'))
+                modal.find('.netid').text(button.data('netid'))
+                modal.find('.intake').text(button.data('intake'))
+                modal.find(".printtype").text(button.data('printtype'))
+                modal.find(".color").text(button.data('color'))
+                modal.find(".status").text(button.data('status'))
+                modal.find(".verification").text(button.data('verification'))
+                modal.find(".comment").text(button.data('comment'))
+            })
+        </script>
 
     </body>
 

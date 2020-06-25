@@ -22,7 +22,7 @@
     </head>
 
     <body>
-        <nav id="navbar-main" class="navbar navbar-expand-lg navbar-light shadow border-primary">
+        <nav id="navbar-main" class="navbar navbar-expand-lg navbar-light shadow">
             <div class="container-fluid">
                 <a class="navbar-brand" href=" ">
                     <img src="../static/assets/img/brand/dooley.png" width="30" height="30" alt="">
@@ -31,7 +31,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbar-default">
-                    <div class="navbar-collapse-header border-primary">
+                    <div class="navbar-collapse-header">
                         <div class="row">
                             <div class="col-6 collapse-brand">
                                 <a href=" ">
@@ -49,13 +49,10 @@
 
                     <ul class="navbar-nav ml-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/printCheck">Check Print</a>
+                            <a class="nav-link" href="/printCheck">Check Prints</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="/printUpload">Upload Print</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/printPrices">Prices</a>
+                            <a class="nav-link" href="/printUpload">Upload Prints</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/employeeIndex">TechLab Employees</a>
@@ -100,14 +97,14 @@
         </div>
 
         <div class="container mt-md-4 ">
-            <p class="display-3 text-center text-primary">How it Works!</p>
+            <p class="display-3 text-center text-gold">How it Works!</p>
         </div>
 
         <div class="container mt-md-4">
             <div class="nav-wrapper">
-                <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+                <ul class="nav nav-pills nav-fill flex-column flex-md-row danger" id="tabs-icons-text" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="ni ni-folder-17 mr-2"></i>Find File!</a>
+                        <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="ni ni-folder-17 mr-2"></i>Find a File!</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false"><i class="ni ni-cloud-upload-96 mr-2"></i>Submit!</a>
@@ -117,7 +114,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="card shadow ">
+            <div class="card shadow">
                 <div class="card-body">
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
@@ -126,7 +123,7 @@
                         </div>
                         <div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
                             <p class="description">Come in to TechLab on the 2nd floor of Cox Hall, also known as Cox Computing. There we can have a quick consultation about your print and get it started for you!</p>
-                            <p class="description">Soon we will be offering remote submission of print jobs!</p>
+                            <p class="description">Or you can submit through our online tool! We may need to reach out for additional information.</p>
                             <p class="description">Hours:</p>
                             <ul class="description">
                                 <li class="description">Monday -Thursday: 12 noon - 8pm</li>
@@ -147,7 +144,18 @@
                     </div>
                 </div>
             </div>
-       </div>
+        </div>
+
+        <div class="container mt-md-4 ">
+            <p class="display-3 text-center text-gold">Prices:</p>
+            <ul class="list shadow rounded">
+                <section class="blank-space"></section>
+              <li class="list-item description">PLA: $2 per 100 grams of PLA used. </li>
+              <li class="list-item description">Resin: $4 per 50 milliliters of resin used.</li>
+                <section class="blank-space"></section>
+            </ul>
+        </div>
+
         <section class="blank-space-large"></section>
 
         <!-- Core -->
