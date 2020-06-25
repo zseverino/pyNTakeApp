@@ -34,7 +34,10 @@ ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '.herokuapp.com']
 
 DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 GS_BUCKET_NAME = 'pyntake-model-storage'
-GS_CREDENTIALS = service_account.Credentials.from_service_account_info(os.environ['GS_CREDENTIALS'])
+json_str = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')
+json_data = json.loads(json_str)
+json_data['private_key'] = json_data['private_key'].replace('\\n', '\n')
+GS_CREDENTIALS = service_account.Credentials.from_service_account_info(json_data)
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
