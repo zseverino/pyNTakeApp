@@ -11,5 +11,6 @@ pyNTakeApp is a submission/intake system for 3D prints, specifcally designed for
 - Timber.io
 - Dj-Database-Url
 - Crispy Forms
+- Django Smart Selects
 - WhiteNoise
 - Boostrap 4/Argon Design System
