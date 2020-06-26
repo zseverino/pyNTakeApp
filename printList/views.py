@@ -9,7 +9,6 @@ from printList.models import Print, Printer
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.core.mail import send_mail
-from django.views.generic.edit import FormMixin
 
 
 # Create your views here.
@@ -85,7 +84,7 @@ def employeeUpdate(request, pk):
 @login_required
 def employeeMarkPrinted(request, pk):
     instance = get_object_or_404(Print, pk=pk)
-    instance.status = 'Printed'
+    instance.status = 'PRINTED'
     instance.printer = Printer.objects.get(printer_name="None")
     email = instance.email
     send_mail('3D Print Ready at MAKEmory',

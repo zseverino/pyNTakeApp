@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
+from smart_selects.db_fields import ChainedForeignKey
 
 # Create your models here.
 class PrintType(models.Model):
@@ -9,11 +10,13 @@ class PrintType(models.Model):
 
 class Printer(models.Model):
     printer_name = models.CharField(max_length=20)
+    print_Type = models.ForeignKey(PrintType, on_delete=models.CASCADE)
     def __str__(self):
         return self.printer_name
 
 class Color(models.Model):
     color_text = models.CharField(max_length=20)
+    print_Type = models.ForeignKey(PrintType,  on_delete=models.CASCADE)
     def __str__(self):
         return self.color_text
 
@@ -29,6 +32,7 @@ class Resolution(models.Model):
 
 class Infill(models.Model):
     infill_text = models.CharField(max_length=10)
+    print_Type = models.ForeignKey(PrintType, on_delete=models.CASCADE)
     def __str__(self):
         return self.infill_text
 
@@ -51,12 +55,12 @@ class Print(models.Model):
     file = models.FileField(upload_to=user_directory_path, validators=[FileExtensionValidator(allowed_extensions=['stl', '3mf', 'gcode'])])
     copies = models.PositiveSmallIntegerField()
     print_Type = models.ForeignKey(PrintType, on_delete=models.CASCADE)
-    color = models.ForeignKey(Color, on_delete=models.CASCADE)
+    color = ChainedForeignKey(Color, chained_field="print_Type", chained_model_field="print_Type", show_all=False, auto_choose=True)
     association = models.ForeignKey(Association, on_delete=models.CASCADE)
     resolution = models.ForeignKey(Resolution, on_delete=models.CASCADE, null=True, blank=True)
-    infill = models.ForeignKey(Infill, on_delete=models.CASCADE, null=True, blank=True)
+    infill = ChainedForeignKey(Infill, chained_field="print_Type", chained_model_field="print_Type", show_all=False, auto_choose=True, null=True, blank=True)
     purpose = models.ForeignKey(Purpose, on_delete=models.CASCADE)
-    printer = models.ForeignKey(Printer, on_delete=models.CASCADE, null=True, blank=True)
+    printer = ChainedForeignKey(Printer, chained_field="print_Type", chained_model_field="print_Type", show_all=False, auto_choose=True, null=True, blank=True)
 
     STATUS_CHOICES = (
         ('NOTPRINTED', 'Not Printed'),
