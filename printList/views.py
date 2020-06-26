@@ -73,11 +73,13 @@ def employeeDownload(request, pk):
 @login_required
 def employeeUpdate(request, pk):
     instance = get_object_or_404(Print, pk=pk)
-    form = updateForm(request.POST or request.FILES or None, instance=instance)
-    if form.is_valid():
-        form.save()
-        messages.success(request, "You successfully updated the print!")
-        return HttpResponseRedirect('/employeeIndex')
+    if request.method == 'POST':
+        form = updateForm(request.POST, request.FILES, instance=instance)
+        if form.is_valid():
+            new_print = form.save()
+            return HttpResponseRedirect('/employeeIndex')
+    else:
+        form = updateForm(instance=instance)
     return render(request, 'employeeIntake.html', {'form': form})
 
 
