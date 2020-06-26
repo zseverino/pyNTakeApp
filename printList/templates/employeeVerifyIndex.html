@@ -93,7 +93,7 @@
                         <td>{{ print.net_ID_or_name }}</td>
                         <td>
                             <a type="link" rel="tooltip" class="open-PrintInfo"
-                                  data-name="{{ print }}" data-status="{{ print.status }}" data-netid="{{ print.net_ID_or_name }}" data-printtype="{{ print.print_Type }}"
+                                  data-name="{{ print }}" data-status="{{ print.get_status_display }}" data-netid="{{ print.net_ID_or_name }}" data-printtype="{{ print.print_Type }}"
                                   data-color="{{ print.color }}" data-resolution="{{ print.resolution }}" data-infill="{{ print.infill }}"
                                   data-printer="{{ print.printer }}" data-copies="{{ print.copies }}" data-comment="{{ print.comment}}" data-pk="{{ print.pk }}"
                                   data-verification="{{ print.verification }}" data-intake="{{ print.intake_datetime }}" data-update="{{ print.updated_datetime }}"
@@ -101,7 +101,7 @@
                                 {{ print }}
                             </a>
                         </td>
-                        <td>{{ print.status }}</td>
+                        <td>{{ print.get_status_display }}</td>
                         <td class="text-center">{{ print.copies }}</td>
                         <td class="td-actions text-center">
                             <a type="button" rel="tooltip" class="btn btn-outline-primary btn-sm" href="/employeeDownload/{{ print.pk }}">
