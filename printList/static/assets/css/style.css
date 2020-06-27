@@ -42,6 +42,10 @@ body {
     padding-right: 1em;
 }
 
+.rounded {
+    border-radius: 25px !important;
+}
+
 hr.rounded {
     border-top: 8px solid #fbb140;
     border-radius: 5px;
