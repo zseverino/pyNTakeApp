@@ -11,7 +11,7 @@
         <link rel="icon" href=" {% static 'assets/img/brand/MAKEmory%20FB%20Icon.png' %}">
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&family=Rubik:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
         <!-- Icons -->
         <link href={% static 'assets/css/nucleo-icons.css' %} rel="stylesheet">
@@ -27,7 +27,7 @@
         <nav id="navbar-main" class="navbar navbar-expand-lg navbar-light shadow">
             <div class="container-fluid">
                 <a class="navbar-brand" href="../ ">
-                    <img src="{% static 'assets/img/brand/dooley.png' %}" width="30" height="30" alt="">
+                    <span style="font-weight: lighter">tech</span><span style="font-weight: bold">lab</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -36,8 +36,8 @@
                     <div class="navbar-collapse-header">
                         <div class="row">
                             <div class="col-6 collapse-brand">
-                                <a href="../ ">
-                                    <img src="{% static 'assets/img/brand/dooley.png' %}">
+                                <a href="../" style="color: #0a0c0d">
+                                   <span style="font-weight: lighter">tech</span><span style="font-weight: bold">lab</span>
                                 </a>
                             </div>
                             <div class="col-6 collapse-close">
@@ -73,6 +73,10 @@
         {% endif %}
 
         <div class="container-fluid  mt-md-4 mb-md-4">
+            <section class="blank-space"></section>
+            <p class="display-3 text-center text-gold">Verify Online Prints</p>
+            <hr class="rounded long">
+            <section class="blank-space"></section>
             <table id="table" data-toggle="table" data-pagination="true"  data-search="true" data-locale="en-US"
             data-show-export="true">
                 <thead>
