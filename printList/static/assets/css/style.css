@@ -26,6 +26,7 @@ body {
 }
 .carousel .carousel-inner {
     border-radius: 15px;
+    box-shadow: 3px 3px 5px #ccc;
 }
 
 .display-1 {
