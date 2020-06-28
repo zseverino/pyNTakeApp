@@ -26,9 +26,12 @@
     <body>
         <nav id="navbar-main" class="navbar navbar-expand-lg navbar-light shadow">
             <div class="container-fluid">
-                <a class="navbar-brand" href="../ ">
-                    <span style="font-weight: lighter">tech</span><span style="font-weight: bold">lab</span>
-                </a>
+                <a href="../"><img src="{% static 'assets/img/brand/dooley.png' %}" height="50px"></a>
+                <div class="col">
+                    <a class="navbar-brand text-left" href="../">
+                        <span style="font-weight: lighter">tech</span><span style="font-weight: bold">lab</span>
+                    </a>
+                </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -36,9 +39,6 @@
                     <div class="navbar-collapse-header">
                         <div class="row">
                             <div class="col-6 collapse-brand">
-                                <a href="../" style="color: #0a0c0d">
-                                   <span style="font-weight: lighter">tech</span><span style="font-weight: bold">lab</span>
-                                </a>
                             </div>
                             <div class="col-6 collapse-close">
                                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
@@ -120,8 +120,10 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <div id="toolbar">
-                <button id="button" class="btn btn-success">refresh</button>
+            <div class="container-fluid">
+                <div class="row">
+                    <button id="button" class="btn btn-success">refresh</button>
+                </div>
             </div>
         </div>
 
