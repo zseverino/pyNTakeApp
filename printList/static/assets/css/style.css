@@ -50,11 +50,10 @@ hr.rounded {
     border-top: 8px solid #fbb140;
     border-radius: 5px;
     width: 10%;
+    box-shadow: 3px 3px 5px #ccc;
 }
 
 hr.rounded.long {
-    border-top: 8px solid #fbb140;
-    border-radius: 5px;
     width: 45%;
 }
 
