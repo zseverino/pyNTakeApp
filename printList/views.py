@@ -1,14 +1,16 @@
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 from django.template import loader
-from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.http import HttpResponse, HttpResponseRedirect, StreamingHttpResponse
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from printList.forms import printForm, updateForm, submitForm, checkForm
-from printList.models import Print, Printer
+from printList.models import Print, Printer, MailMessage, MailSubjectLine
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.core.mail import send_mail
+import csv
 
 
 # Create your views here.
@@ -31,12 +33,12 @@ class employeeVerifyIndex(LoginRequiredMixin, generic.ListView):
     model = Print
     template_name = 'employeeVerifyIndex.html'
 
-
 def printUpload(request):
     if request.method == 'POST':
         form = submitForm(request.POST, request.FILES)
         if form.is_valid():
             new_print = form.save()
+            messages.success(request, "Print Submitted!")
             return HttpResponseRedirect('/')
     else:
         form = submitForm()
@@ -48,8 +50,7 @@ class printCheck(generic.FormView):
     template_name = 'printCheck.html'
 
     def form_valid(self, form, **kwargs):
-        return self.render_to_response(self.get_context_data(form=form, net_id=form.data['net_id'], print_list=Print.objects.all()))
-
+        return self.render_to_response(self.get_context_data(form=form, email=form.data['email'], print_list=Print.objects.all()))
 
 @login_required
 def employeeIntake(request):
@@ -77,6 +78,7 @@ def employeeUpdate(request, pk):
         form = updateForm(request.POST, request.FILES, instance=instance)
         if form.is_valid():
             new_print = form.save()
+            messages.success(request, "You successfully updated the print!")
             return HttpResponseRedirect('/employeeIndex')
     else:
         form = updateForm(instance=instance)
@@ -87,16 +89,29 @@ def employeeUpdate(request, pk):
 def employeeMarkPrinted(request, pk):
     instance = get_object_or_404(Print, pk=pk)
     instance.status = 'PRINTED'
-    instance.printer = Printer.objects.get(printer_name="None")
+    instance.printer = Printer.objects.get(printer_name="None", print_Type=instance.print_Type)
     email = instance.email
-    send_mail('3D Print Ready at MAKEmory',
-              'Dear Customer,\n \nYour 3D printing project has been completed and is ready to be picked up. As a reminder, the only accepted payments are either through Eagle Dollars (on your Emory Card) or speedtypes (for clubs, departments, etc.) \n \n'
-              'MAKEmory in the Computing Center is open during the following hours:\n'
-              'Monday - Thursday: noon - 8pm\n'
-              'Friday: noon - 5pm\n \n'
-              'Please feel free to stop by at your earliest convenience and someone in MAKEmory will be able to assist you.\n \n'
-              'Thank you,\n'
-              'MAKEmory Staff',
-              'zackseve@gmail.com', [email], fail_silently=True)
+    send_mail(subject=get_object_or_404(MailSubjectLine, pk=1).subject_text, message=get_object_or_404(MailMessage, pk=1).message_text, from_email='zackseve@gmail.com', recipient_list=[email], fail_silently=False)
     instance.save()
     return HttpResponseRedirect('/employeeIndex')
+
+@login_required
+def dataExport(request):
+    if not request.user.is_staff:
+        raise PermissionDenied
+    opts = Print.objects.all().model._meta
+    model = Print.objects.all().model
+    response = HttpResponse(content_type='text/csv')
+    # force download.
+    response['Content-Disposition'] = 'attachment;filename=TechLab_Prints.csv'
+    # the csv writer
+    writer = csv.writer(response)
+    field_names = [field.name for field in opts.fields]
+    # Write a first row with header information
+    writer.writerow(field_names)
+    # Write data rows
+    for obj in Print.objects.all():
+        writer.writerow([getattr(obj, field) for field in field_names])
+    return response
+
+
