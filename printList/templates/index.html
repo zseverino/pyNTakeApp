@@ -62,6 +62,14 @@
             </div>
         </nav>
 
+        {% if messages %}
+            <section class="messages">
+                {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+            {% endfor %}
+            </section>
+        {% endif %}
+
         <div class="container mt-md-4 text-center">
             <section class="blank-space"></section>
             <p class="display-3">TechLab's 3D Print Utility</p>
