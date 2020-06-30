@@ -97,8 +97,8 @@
                         <td>{{ print.net_ID_or_name }}</td>
                         <td>
                             <a type="link" rel="tooltip" class="open-PrintInfo"
-                                  data-name="{{ print }}" data-status="{{ print.get_status_display }}" data-netid="{{ print.net_ID_or_name }}" data-printtype="{{ print.print_Type }}"
-                                  data-color="{{ print.color }}" data-resolution="{{ print.resolution }}" data-infill="{{ print.infill }}"
+                                  data-name="{{ print }}" data-status="{{ print.get_status_display }}" data-netid="{{ print.net_ID_or_name }}" data-email="{{ print.email }}"
+                                  data-printtype="{{ print.print_Type }}" data-color="{{ print.color }}" data-resolution="{{ print.resolution }}" data-infill="{{ print.infill }}"
                                   data-printer="{{ print.printer }}" data-copies="{{ print.copies }}" data-comment="{{ print.comment}}" data-pk="{{ print.pk }}"
                                   data-verification="{{ print.verification }}" data-intake="{{ print.intake_datetime }}" data-update="{{ print.updated_datetime }}"
                                   data-toggle="modal" href="#printModal">
@@ -154,6 +154,12 @@
                           <dt>NetID/Name: </dt>
                           &nbsp;
                           <dd class="netid"></dd>
+                      </div>
+
+                      <div class="row">
+                          <dt>Email: </dt>
+                          &nbsp;
+                          <dd class="email"></dd>
                       </div>
 
                       <div class="row">
@@ -271,6 +277,7 @@
                 modal.find('.intake').text(button.data('intake'))
                 modal.find('.update').text(button.data('update'))
                 modal.find('.netid').text(button.data('netid'))
+                modal.find('.email').text(button.data('email'))
                 modal.find(".status").text(button.data('status'))
                 modal.find(".verification").text(button.data('verification'))
                 modal.find(".printtype").text(button.data('printtype'))
