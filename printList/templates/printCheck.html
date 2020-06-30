@@ -94,7 +94,7 @@
                     </thead>
                     <tbody>
                         {% for print in print_list reversed %}
-                        {% ifequal print.net_ID_or_name net_id %}
+                        {% ifequal print.email email %}
                         <tr>
                             <td class="text-center">{{ print.intake_datetime }}</td>
                             <td>{{ print.net_ID_or_name }}</td>
