@@ -3,8 +3,8 @@
 ## Installation
  In order to install and use the PyNTakeApp, there are three basic requirements:
   - File Storage - storing your print files
-  - A Relational Database - storing your information
   - A Server - for hosting the app online
+  - A Relational Database - storing your information
 
  There is a variety of ways to achieve these, so I will provide a list of options for each requirement, alongside an example.
  
@@ -20,6 +20,7 @@
  - SFTP
 
   Determine what storage platform is best for you. In our usage, we have used Google Cloud Storage and are moving to SFTP. Modify 'settings.py' located in the PyNTakeApp folder, to the specifcations outlined in https://pypi.org/project/django-storages/ for your chosen platform. 
+  
  Ex: Google Cloud Storages
   1. Create a Google Cloud Platform account
   2. Create a Project and a bucket within as the specific location for the files
@@ -31,3 +32,19 @@
    "DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'"
    "GS_BUCKET_NAME = 'your_bucket_name_here'"
    "GS_CREDENTIALS = path/to/json/key" (If hosting publicly, use environment variables)
+   
+#Server
+ When it comes to choosing how you are hosting your version of the PyNTake App, you have a lot of great options, including but not limited to:
+  - Heroku
+  - AWS
+  - Microsoft Azure
+  - Google Cloud Platform
+  - Digital Ocean
+  - Python Anywhere
+  
+ Determine what storage platform is best for you, based upon the cost, support and additional services they may offer. For instance if you are using Google Cloud Storage for file storage you may want to do the same for hosting. Also some providers like Heroku may provide databases alongside hosting. Heres a great gettig starting guide with Django hosting: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Deployment
+ 
+ Ex. Heroku
+  1. 
+   
+#Database
