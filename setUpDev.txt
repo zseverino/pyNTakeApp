@@ -28,10 +28,8 @@ How to setup and test the Django development environment:
             workon name_of_environment — Activate the specified Python virtual environment
             rmvirtualenv name_of_environment — Remove the specified environment.
 
-    5. Once in the virtual environment, install Django & Crispy forms:
-        pip3 install django
-        pip install django-crispy-forms
-        pip install django-storages[google]
+    5. Once in the virtual environment, install the required dependencies in requirements.txt using pip:
+        ex: pip3 install django
 
     6. cd to the clone repository and run the command:
         "py manage.py runserver"
@@ -42,5 +40,5 @@ Source for more Details:
 
 
 Troubleshooting:
-On an apple operating system you may have to replace "py" command with "python".
+On OSX (Macs) you may have to replace "py" command with "python".
 If Step 3 doesn't work, check where pip installed virtualenvwrapper (easiest way is to run "pip uninstall virtualenvwrapper" and then see what it says it will uninstall, and then click N when it asks to confirm.)
