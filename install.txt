@@ -1,5 +1,6 @@
 *** Work in Progress***
 
+## Installation
 In order to install and use the PyNTakeApp, there are three basic requirements:
  - File Storage - storing your print files
  - A Relational Database - storing your information
@@ -7,5 +8,5 @@ In order to install and use the PyNTakeApp, there are three basic requirements:
  
  There is a variety of ways to achieve these, so I will provide a list of options for each requirement, alongside an example.
  
- *File Storage*
+ #File Storage
  
