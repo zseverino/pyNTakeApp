@@ -4,13 +4,16 @@ pyNTakeApp is a submission/intake system for 3D prints, specifcally designed for
 ## Technology Stack:
 - Django
 - Django Storages
-- Google Cloud Storage
-- Gunicorn
-- Postgres
-- Sqreen
-- Timber.io
-- Dj-Database-Url
+- Google Cloud Storage*
+- Gunicorn*
+- Postgres*
+- Sqreen**
+- Timber.io**
+- Dj-Database-Url*
 - Crispy Forms
 - Django Smart Selects
 - WhiteNoise
 - Boostrap 4/Argon Design System
+
+* -- Other providers/solutions can be used - Outlines in install.txt
+** -- Not necessary for operation - Used with Heroku
