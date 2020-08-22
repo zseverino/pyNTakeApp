@@ -3,8 +3,9 @@
 ## Installation
  In order to install and use the PyNTakeApp, there are three basic requirements:
   - File Storage - storing your print files
-  - A Server - for hosting the app online
+  - A Server - hosting the app online
   - A Relational Database - storing your information
+  - Email - sending out emails to patrons
 
  There is a variety of ways to achieve these, so I will provide a list of options for each requirement, alongside an example.
  
@@ -33,6 +34,54 @@
    "GS_BUCKET_NAME = 'your_bucket_name_here'"
    "GS_CREDENTIALS = path/to/json/key" (If hosting publicly, use environment variables)
    
+ Otherwise you will need to modify settings.py:
+  - settings.py (delete):
+  "
+   DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+   GS_BUCKET_NAME = 'pyntake-model-storage'
+   json_str = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')
+   json_data = json.loads(json_str)
+   json_data['private_key'] = json_data['private_key'].replace('\\n', '\n')
+   GS_CREDENTIALS = service_account.Credentials.from_service_account_info(json_data)
+  "
+  **And** add the correct lines/info that django-storages calls for your file storage provider.
+
+#Database
+ You not only have many choices on how to host your databse, you also have a lot of options on what kind of database to host and store your data on:
+  - PostgreSQL (recommended)
+  - MariaDB
+  - MySQL
+  - Oracle
+  
+ After choosing the kind of database you would want to use, you need to choose yur host provider. There are endless options for hosting databases, here are a    few:
+  - Heroku
+  - AWS
+  - Google Cloud
+  - Microsoft Azure
+  - Digital Ocean
+  and so on.
+ 
+For easier out of the box use, it is suggested to bundle the database with server provider if possible ex. Heroku. 
+
+Otherwise you will need to modify the following:
+  - settings.py (modify):
+   "
+   #Database
+   #https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+   DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+    "
+    With the corrrect information from your database provider.
+ - settings.py (delete):
+  "
+   db_from_env = dj_database_url.config(conn_max_age=500)
+   DATABASES['default'].update(db_from_env)
+  "
+
 #Server
  When it comes to choosing how you are hosting your version of the PyNTake App, you have a lot of great options, including but not limited to:
   - Heroku
@@ -44,8 +93,12 @@
   
  Determine what storage platform is best for you, based upon the cost, support and additional services they may offer. For instance if you are using Google Cloud Storage for file storage you may want to do the same for hosting. Also some providers like Heroku may provide databases alongside hosting. Heres a great gettig starting guide with Django hosting: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Deployment
  
- Ex. Heroku
-  1. 
+ Ex. Heroku (These guides does a better job than I ever could)
+  - https://devcenter.heroku.com/categories/working-with-django
+  - https://devcenter.heroku.com/articles/deploying-python
+  - https://blog.heroku.com/from-project-to-productionized-python
+  - https://tutorial-extensions.djangogirls.org/en/heroku/
+   - As of writing this, **do not install django-heroku**, it breaks deployment
   
  List of Dependencies (Not including dependcies based upon file storage, and sever specific)
   - dj-database-url==0.5.0 (Not necessary but advised)
@@ -56,5 +109,16 @@
   - gunicorn==20.0.4
   - whitenoise==5.1.0
   - psycopg2==2.8.5
-   
-#Database
+  
+#Email 
+ Again, you have many options when it comes to email providers: Gmail, Outlook, Yahoo etc. Each has their own SMTP setup that can easily be found on google.
+ You will need to modify the follwing:
+  - settings.py:
+  "
+   EMAIL_HOST = 'smtp.gmail.com'
+   EMAIL_USE_TLS = True
+   EMAIL_PORT = 587
+   EMAIL_HOST_USER = 'youremail@here.com'
+   EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+  "
+  If your are hosting publicy, you should os environment variables like 'EMAIL_HOST_PASSWORD' so your sensitive information is not public.
