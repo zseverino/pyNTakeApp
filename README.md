@@ -15,5 +15,6 @@ pyNTakeApp is a submission/intake system for 3D prints, specifcally designed for
 - WhiteNoise
 - Boostrap 4/Argon Design System
 
-(*) -- Other providers/solutions can be used - Outlines in install.txt
-/n (**) -- Not necessary for operation - Used with Heroku
+\* -- Other providers/solutions can be used - Outlines in install.txt
+
+\** -- Not necessary for operation - Used with Heroku
