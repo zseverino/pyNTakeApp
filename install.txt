@@ -46,5 +46,15 @@
  
  Ex. Heroku
   1. 
+  
+ List of Dependencies (Not including dependcies based upon file storage, and sever specific)
+  - dj-database-url==0.5.0 (Not necessary but advised)
+  - Django==3.0.7
+  - django-crispy-forms==1.9.1
+  - django-storages==1.9.1
+  - django-smart-selects==1.5.6
+  - gunicorn==20.0.4
+  - whitenoise==5.1.0
+  - psycopg2==2.8.5
    
 #Database
